@@ -5,7 +5,7 @@ import pandas as pd
 
 def validate_file(file_path):
     df = pd.read_csv(
-        "{file_path}"
+        f"{file_path}"
     )
     context = gx.get_context()
     data_source = context.data_sources.add_pandas("pandas")
