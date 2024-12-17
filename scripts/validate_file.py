@@ -1,5 +1,6 @@
 import great_expectations as gx
 import pandas as pd
+import datetime
 import os
 
 
@@ -9,8 +10,11 @@ def validate_file(path_file):
     df = pd.read_csv(path_file)
     context = gx.get_context()
 
-    context.data_sources.remove("pandas")
-    data_source = context.data_sources.add_pandas("pandas")
+    # Generar un nombre único basado en la fecha y hora actual
+    current_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    data_source_name = f"pandas_{current_time}"
+
+    data_source = context.data_sources.add_pandas(data_source_name)
 
     data_asset = data_source.add_dataframe_asset(name="pd dataframe asset")
 
