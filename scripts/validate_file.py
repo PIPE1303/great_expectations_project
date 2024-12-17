@@ -10,7 +10,7 @@ def validate_file(path_file):
     context = gx.get_context()
 
     data_source_name = "pandas"
-    data_source = context.data_sources.get(data_source_name, None)
+    data_source = context.data_sources.get(data_source_name, default=None)
 
     if data_source is None:
         data_source = context.data_sources.add_pandas(data_source_name)
