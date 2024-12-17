@@ -3,9 +3,9 @@ import great_expectations as gx
 import pandas as pd
 
 
-def validate_file(file_path):
+def validate_file():
     df = pd.read_csv(
-        f"{file_path}"
+    "https://raw.githubusercontent.com/great-expectations/gx_tutorials/main/data/yellow_tripdata_sample_2019-01.csv"
     )
     context = gx.get_context()
     data_source = context.data_sources.add_pandas("pandas")
@@ -46,4 +46,4 @@ def validate_file(file_path):
 
 
 if __name__ == "__main__":
-    validate_file("data/raw/data_to_validate.csv")
+    validate_file()
