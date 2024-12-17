@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Validate File') {
             steps {
-                sh './venv/bin/python validate_file.py'
+                sh './venv/bin/python scripts/validate_file.py'
             }
         }
     }
