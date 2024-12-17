@@ -1,19 +1,24 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9' // Imagen con Python preinstalado
-        }
-    }
+    agent any
     stages {
         stage('Setup Environment') {
             steps {
-                sh 'python -m venv venv'
+                sh 'python3 -m venv venv'
+                sh './venv/bin/pip install -r requirements.txt'
             }
         }
         stage('Validate File') {
             steps {
-                sh './venv/bin/python validate_file.py'
+                sh './venv/bin/python scripts/validate_file.py'
             }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'data/raw/*.csv', onlyIfSuccessful: true
+        }
+        failure {
+            echo 'Validation failed. Check logs for details.'
         }
     }
 }
