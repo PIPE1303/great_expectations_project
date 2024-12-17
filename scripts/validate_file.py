@@ -8,7 +8,12 @@ def validate_file(path_file):
     # Leer el archivo CSV
     df = pd.read_csv(path_file)
     context = gx.get_context()
-    data_source = context.data_sources.add_pandas("pandas")
+
+    if "pandas" in context.data_sources:
+        data_source = context.data_sources["pandas"]
+    else:
+        data_source = context.data_sources.add_pandas("pandas")
+
     data_asset = data_source.add_dataframe_asset(name="pd dataframe asset")
 
     batch_definition = data_asset.add_batch_definition_whole_dataframe("batch definition")
